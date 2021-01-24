@@ -1,0 +1,15 @@
+Fill the combobox - DONE
+I need to pass an array to the combox constructor
+I need to take the vector of displayItems
+and to get only the item nale coloumn
+put it in an array
+
+Get the price
+Listner VVV
+when a selected Item from the combo box is chosen VVV
+I need to get the name of the selected item VVV
+I need to vector.indexof(selected item)vv
+int price = vector.get(index).getprice
+label.setText(price.toString)
+
+add vv

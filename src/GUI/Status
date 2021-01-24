@@ -1,0 +1,10 @@
+Tested and works fine;
+AdminActions
+LoginGUI
+ModifyUserGUI
+UserListGUI  - I want to gray out coloumn ID
+
+NEXT
+UserActionsGUI
+OrdersGUI - Nees to edit the veirfy method and add it to to add
+need to remove the row also from the sub total

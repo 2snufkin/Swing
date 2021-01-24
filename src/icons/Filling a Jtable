@@ -1,0 +1,80 @@
+2 Methods: Using an 2DArray or a Vector
+2DArray
+
+ try {
+            myConnection = MyConnectionSingleton.getInstance();
+            String req = "SELECT * FROM materiels";
+            ste = myConnection.createStatement();
+            ResultSet res = ste.executeQuery(req);
+            String cols[] = {"id", "User Name", "Password", "Role"};//defining the cols name
+            String data[][] = new String[9][3];//defining the array's size [rows] [coloumns]
+            int i = 0;
+            while (res.next()) {
+                int id = res.getInt("id");//getting the ID record
+                String materiel = res.getString("materiel"); //getting the materiel record
+                String marque = res.getString("marque"); //getting the mark
+                data[i][0] = id + ""; //setting the first row data[0][0] first col
+                data[i][1] = materiel; //setting the first row data[0][1] second col
+                data[i][2] = marque;//setting the first row data[0][2] third cols
+                    i++;
+            }
+            //doing it as long as I have got results
+
+  DefaultTableModel model = new DefaultTableModel(data, cols); connecting the array with a Model
+              JTable table = new JTable(model);
+              table.setShowGrid(true);
+              table.setShowHorizontalLines(true);
+              JScrollPane pane = new JScrollPane(table);
+              JFrame frame = new JFrame("Exemple de JTable");
+              JPanel panel = new JPanel();
+              panel.add(pane);
+              frame.add(panel);
+              frame.setSize(500, 300);
+              frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+              frame.setVisible(true);
+
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+      }
+
+
+
+ VECTOR
+ try{
+    con = DriverManager.getConnection("jdbc:mysql://localhost/test_db","root","");
+  st = con.createStatement();
+  s = "select * from users";
+  rs = st.executeQuery(s);
+
+  //Inserting the coloumns names - nesscery I dont think so
+  ResultSetMetaData rsmt = rs.getMetaData();// it will serve for the next step
+  int c = rsmt.getColumnCount();//check how many coloumns I have got
+  Vector  column = new Vector(c);//Creating the vector
+  for(int i = 1; i <= c; i++) {
+  column.add(rsmt.getColumnName(i));
+  }
+// this is the interesting part
+  Vector data = new Vector();
+  Vector row = new Vector();
+
+  while(rs.next()) {
+  row = new Vector(c);
+
+  for(int i = 1; i <= c; i++){
+  row.add(rs.getString(i));
+  }
+
+  data.add(row);
+  }
+
+   JFrame frame = new JFrame();
+   frame.setSize(500,120);
+   frame.setLocationRelativeTo(null);
+   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   JPanel panel = new JPanel();
+   JTable table = new JTable(data,column);//connecting the Jtable to the Array
+   JScrollPane jsp = new JScrollPane(table);
+   panel.setLayout(new BorderLayout());
+   panel.add(jsp,BorderLayout.CENTER);
+   frame.setContentPane(panel); frame.setVisible(true);
